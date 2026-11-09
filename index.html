@@ -249,15 +249,15 @@ const PHOTO = {
   x: 604, y: 574, w: 454, h: 550,
   radius: 25 // Rounded corners based on the white frame in the design
 };
-
+ 
 const NAME = {
   centerX: 604 + (454 / 2), // Perfectly centered
-  baselineY: 1185,          // Vertical position (up/down)
-  fontSize: 34,             // 👈 REDUCED from 36 to 34 (makes it slightly smaller)
-  // 👇 CHANGED: Removed Impact/Arial Black. Changed 700 to 400 (Normal weight).
-  font: "400 {SIZE}px 'Helvetica', 'Arial', sans-serif" 
+  baselineY: 1185,          // Below the black line
+  fontSize: 34,             // Size
+  // Using Montserrat (clean modern) with 400 weight (NO bold effect)
+  font: "400 {SIZE}px 'Montserrat', 'Helvetica', sans-serif" 
 };
-
+ 
 // ============ SETUP ============
 const canvas = document.getElementById('preview');
 const ctx = canvas.getContext('2d');
