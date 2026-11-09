@@ -246,16 +246,16 @@ const CANVAS_W = 1236;
 const CANVAS_H = 1536;
 
 const PHOTO = {
-  x: 601, y: 574, w: 454, h: 644,
+  x: 601, y: 574, w: 454, h: 545,
   radius: 25 // Rounded corners based on the white frame in the design
 };
 
-// Text sits right above the black line at the bottom of the white frame
 const NAME = {
-  centerX: 601 + (454 / 2), // Perfectly centered in the frame
-  baselineY: 1140,          // Just above the black line (which is at 1151)
-  fontSize: 36,
-  font: "bold {SIZE}px 'Montserrat', 'Arial', sans-serif"
+  centerX: 601 + (454 / 2), // Perfectly centered
+  baselineY: 1185,          // Below the black line, centered in the bottom space
+  fontSize: 38,
+  // Using 'Impact' / 'Oswald' / 'Arial Black' for that bold, condensed poster look
+  font: "900 {SIZE}px 'Impact', 'Arial Black', sans-serif" 
 };
 
 // ============ SETUP ============
