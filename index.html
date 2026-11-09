@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond The Degree Summit 2026 - Personalized Flyer</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #064e3b 0%, #022c22 100%); /* Green theme */
+    min-height: 100vh;
+    padding: 20px;
+    color: #fff;
+  }
+  .container {
+    max-width: 540px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    padding: 25px;
+    color: #1e293b;
+  }
+  h1 { font-size: 20px; text-align: center; color: #064e3b; margin-bottom: 5px; line-height: 1.3; }
+  .subtitle { text-align: center; font-size: 13px; color: #64748b; margin-bottom: 20px; }
+
+  .field { margin-bottom: 18px; }
+  label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: #334155; margin-bottom: 6px;
+  }
+  label svg { vertical-align: -3px; margin-right: 5px; }
+
+  input[type="text"], input[type="file"] {
+    width: 100%; padding: 12px 14px;
+    border: 2px solid #e2e8f0; border-radius: 10px;
+    font-size: 15px; outline: none; transition: border 0.2s;
+    font-family: inherit;
+  }
+  input[type="text"]:focus { border-color: #064e3b; }
+  input[type="file"] { padding: 8px; background: #f8fafc; cursor: pointer; }
+
+  .color-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; background: #f8fafc;
+    border: 2px solid #e2e8f0; border-radius: 10px;
+  }
+  .color-row label {
+    margin: 0; flex: 1; font-size: 13px;
+    display: flex; align-items: center;
+  }
+  input[type="color"] {
+    width: 50px; height: 38px; border: none;
+    border-radius: 8px; cursor: pointer;
+    background: transparent;
+  }
+
+  .preview-wrap {
+    margin: 0 0 16px 0;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 8px;
+    background: #f8fafc;
+  }
+  #preview {
+    width: 100%; height: auto; display: block;
+    border-radius: 8px;
+    cursor: default;
+    touch-action: none;
+  }
+
+  .zoom-row {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .zoom-row label {
+    margin: 0; font-size: 13px; min-width: 90px;
+    color: #334155;
+    display: flex; align-items: center;
+  }
+  .zoom-row input[type="range"] {
+    flex: 1;
+    accent-color: #064e3b;
+  }
+  .zoom-row span {
+    font-size: 12px; color: #64748b;
+    min-width: 45px; text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .btn {
+    width: 100%; padding: 14px; border: none;
+    border-radius: 12px; font-size: 16px;
+    font-weight: 700; cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary {
+    background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(6, 78, 59, 0.35);
+  }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-secondary {
+    background: #f1f5f9; color: #475569;
+    font-size: 13px; padding: 10px;
+    margin-bottom: 12px;
+  }
+  .btn-secondary:hover { background: #e2e8f0; }
+
+  .hint {
+    font-size: 12px; color: #64748b;
+    margin: 8px 0 14px;
+    padding: 8px;
+    background: #ecfdf5;
+    border-radius: 8px; border-left: 3px solid #10b981;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+
+  .status {
+    text-align: center; font-size: 13px;
+    color: #64748b; margin-top: 12px; min-height: 18px;
+  }
+  .status.error { color: #dc2626; }
+  .status.success { color: #16a34a; }
+
+  .section-title {
+    font-size: 12px; font-weight: 700;
+    color: #64748b; text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 20px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .text-block {
+    padding: 12px;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  .text-block .field { margin-bottom: 10px; }
+  .text-block .color-row { background: #fff; padding: 8px 10px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Street2Smile Foundation Presents:<br>Beyond The Degree Summit 2026</h1>
+  <p class="subtitle">Upload your photo and name to confirm your presence.</p>
+
+  <!-- PHOTO SECTION -->
+  <div class="section-title">1. Your Photo</div>
+
+  <div class="field">
+    <label for="photoInput">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#064e3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      Upload Photo
+    </label>
+    <input type="file" id="photoInput" accept="image/*">
+  </div>
+
+  <!-- TEXT SECTION -->
+  <div class="section-title">2. Your Name</div>
+
+  <!-- NAME -->
+  <div class="text-block">
+    <div class="field">
+      <label for="nameInput">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#064e3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+        Full Name
+      </label>
+      <input type="text" id="nameInput" placeholder="e.g. John Doe" maxlength="35">
+    </div>
+    <div class="color-row">
+      <label>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#064e3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="#064e3b"/><circle cx="17.5" cy="10.5" r=".5" fill="#064e3b"/><circle cx="8.5" cy="7.5" r=".5" fill="#064e3b"/><circle cx="6.5" cy="12.5" r=".5" fill="#064e3b"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+        Text Color
+      </label>
+      <input type="color" id="nameColor" value="#000000">
+    </div>
+  </div>
+
+  <!-- PREVIEW + ADJUSTMENTS SECTION -->
+  <div class="section-title">3. Preview &amp; Fine-Tune</div>
+
+  <div class="preview-wrap">
+    <canvas id="preview"></canvas>
+  </div>
+
+  <div class="zoom-row">
+    <label>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#064e3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12H3M6 9l-3 3 3 3M18 9l3 3-3 3"/></svg>
+      H-Zoom
+    </label>
+    <input type="range" id="zoomXSlider" min="0.5" max="4" step="0.01" value="1" disabled>
+    <span id="zoomXValue">1.00x</span>
+  </div>
+
+  <div class="zoom-row">
+    <label>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#064e3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M9 6l3-3 3 3M9 18l3 3 3-3"/></svg>
+      V-Zoom
+    </label>
+    <input type="range" id="zoomYSlider" min="0.5" max="4" step="0.01" value="1" disabled>
+    <span id="zoomYValue">1.00x</span>
+  </div>
+
+  <div class="zoom-row">
+    <label>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#064e3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+      Rotate
+    </label>
+    <input type="range" id="rotateSlider" min="-180" max="180" step="1" value="0" disabled>
+    <span id="rotateValue">0°</span>
+  </div>
+
+  <button class="btn btn-secondary" id="resetPhoto" disabled>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+    Reset Photo Position
+  </button>
+
+  <p class="hint" id="dragHint" style="display:none;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg>
+    Drag the photo on the preview above to reposition it
+  </p>
+
+  <button class="btn btn-primary" id="downloadBtn" disabled>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+    Download My Flyer
+  </button>
+  <p class="status" id="status">Loading flyer...</p>
+</div>
+
+<script>
+// ============ CONFIGURATION FROM ANALYSIS ============
+const CANVAS_W = 1236;
+const CANVAS_H = 1536;
+
+const PHOTO = {
+  x: 601, y: 574, w: 454, h: 644,
+  radius: 25 // Rounded corners based on the white frame in the design
+};
+
+// Text sits right above the black line at the bottom of the white frame
+const NAME = {
+  centerX: 601 + (454 / 2), // Perfectly centered in the frame
+  baselineY: 1140,          // Just above the black line (which is at 1151)
+  fontSize: 36,
+  font: "bold {SIZE}px 'Montserrat', 'Arial', sans-serif"
+};
+
+// ============ SETUP ============
+const canvas = document.getElementById('preview');
+const ctx = canvas.getContext('2d');
+canvas.width = CANVAS_W;
+canvas.height = CANVAS_H;
+
+const baseImage = new Image();
+baseImage.crossOrigin = "anonymous";
+baseImage.src = "flyer.png";
+
+// State
+let userPhoto = null;
+let photoZoomX = 1.0;
+let photoZoomY = 1.0;
+let photoRotation = 0;
+let photoOffsetX = 0;
+let photoOffsetY = 0;
+let isDragging = false;
+let dragStartX = 0, dragStartY = 0;
+let dragStartOffsetX = 0, dragStartOffsetY = 0;
+let isReady = false;
+
+// DOM
+const photoInput = document.getElementById('photoInput');
+const nameInput = document.getElementById('nameInput');
+const nameColor = document.getElementById('nameColor');
+const zoomXSlider = document.getElementById('zoomXSlider');
+const zoomXValue = document.getElementById('zoomXValue');
+const zoomYSlider = document.getElementById('zoomYSlider');
+const zoomYValue = document.getElementById('zoomYValue');
+const rotateSlider = document.getElementById('rotateSlider');
+const rotateValue = document.getElementById('rotateValue');
+const downloadBtn = document.getElementById('downloadBtn');
+const resetBtn = document.getElementById('resetPhoto');
+const dragHint = document.getElementById('dragHint');
+
+// ============ LOAD BASE FLYER ============
+baseImage.onload = () => {
+  isReady = true;
+  render();
+  updateStatus("Ready! Upload a photo to start.", "");
+};
+baseImage.onerror = () => {
+  updateStatus("Could not load flyer.png — check filename.", "error");
+};
+
+// ============ PHOTO UPLOAD ============
+photoInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    const img = new Image();
+    img.onload = () => {
+      userPhoto = img;
+      photoZoomX = 1.0;
+      photoZoomY = 1.0;
+      photoRotation = 0;
+      photoOffsetX = 0;
+      photoOffsetY = 0;
+      zoomXSlider.value = 1;
+      zoomYSlider.value = 1;
+      rotateSlider.value = 0;
+      zoomXValue.textContent = "1.00x";
+      zoomYValue.textContent = "1.00x";
+      rotateValue.textContent = "0°";
+      zoomXSlider.disabled = false;
+      zoomYSlider.disabled = false;
+      rotateSlider.disabled = false;
+      resetBtn.disabled = false;
+      dragHint.style.display = 'flex';
+      render();
+      checkReady();
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+// ============ SLIDER EVENTS ============
+zoomXSlider.addEventListener('input', (e) => {
+  photoZoomX = parseFloat(e.target.value);
+  zoomXValue.textContent = photoZoomX.toFixed(2) + 'x';
+  render();
+});
+
+zoomYSlider.addEventListener('input', (e) => {
+  photoZoomY = parseFloat(e.target.value);
+  zoomYValue.textContent = photoZoomY.toFixed(2) + 'x';
+  render();
+});
+
+rotateSlider.addEventListener('input', (e) => {
+  photoRotation = parseInt(e.target.value);
+  rotateValue.textContent = photoRotation + '°';
+  render();
+});
+
+resetBtn.addEventListener('click', () => {
+  photoZoomX = 1.0;
+  photoZoomY = 1.0;
+  photoRotation = 0;
+  photoOffsetX = 0;
+  photoOffsetY = 0;
+  zoomXSlider.value = 1;
+  zoomYSlider.value = 1;
+  rotateSlider.value = 0;
+  zoomXValue.textContent = "1.00x";
+  zoomYValue.textContent = "1.00x";
+  rotateValue.textContent = "0°";
+  render();
+});
+
+// ============ TEXT INPUTS ============
+[nameInput].forEach(el => {
+  el.addEventListener('input', () => { render(); checkReady(); });
+});
+[nameColor].forEach(el => {
+  el.addEventListener('input', () => render());
+});
+
+// ============ DRAG INTERACTION ============
+function getCanvasCoords(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  return {
+    x: (clientX - rect.left) * scaleX,
+    y: (clientY - rect.top) * scaleY
+  };
+}
+
+function isInsidePhotoBox(x, y) {
+  return x >= PHOTO.x && x <= PHOTO.x + PHOTO.w &&
+         y >= PHOTO.y && y <= PHOTO.y + PHOTO.h;
+}
+
+function startDrag(e) {
+  if (!userPhoto) return;
+  const { x, y } = getCanvasCoords(e);
+  if (isInsidePhotoBox(x, y)) {
+    isDragging = true;
+    dragStartX = x;
+    dragStartY = y;
+    dragStartOffsetX = photoOffsetX;
+    dragStartOffsetY = photoOffsetY;
+    canvas.style.cursor = 'grabbing';
+    e.preventDefault();
+  }
+}
+
+function moveDrag(e) {
+  const { x, y } = getCanvasCoords(e);
+  if (!userPhoto) return;
+
+  if (!isDragging) {
+    canvas.style.cursor = isInsidePhotoBox(x, y) ? 'grab' : 'default';
+    return;
+  }
+
+  photoOffsetX = dragStartOffsetX + (x - dragStartX);
+  photoOffsetY = dragStartOffsetY + (y - dragStartY);
+  render();
+  e.preventDefault();
+}
+
+function endDrag() {
+  if (isDragging) {
+    isDragging = false;
+    canvas.style.cursor = 'grab';
+  }
+}
+
+canvas.addEventListener('mousedown', startDrag);
+canvas.addEventListener('mousemove', moveDrag);
+canvas.addEventListener('mouseup', endDrag);
+canvas.addEventListener('mouseleave', endDrag);
+canvas.addEventListener('touchstart', startDrag, { passive: false });
+canvas.addEventListener('touchmove', moveDrag, { passive: false });
+canvas.addEventListener('touchend', endDrag);
+
+// ============ RENDER ============
+function render() {
+  if (!isReady) return;
+
+  ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+  ctx.drawImage(baseImage, 0, 0, CANVAS_W, CANVAS_H);
+
+  if (userPhoto) drawPhotoInBox();
+  drawName();
+}
+
+function drawPhotoInBox() {
+  const { x, y, w, h, radius } = PHOTO;
+
+  const baseScale = Math.max(w / userPhoto.width, h / userPhoto.height);
+  const scaleX = baseScale * photoZoomX;
+  const scaleY = baseScale * photoZoomY;
+
+  const drawW = userPhoto.width * scaleX;
+  const drawH = userPhoto.height * scaleY;
+
+  const centerX = x + w / 2 + photoOffsetX;
+  const centerY = y + h / 2 + photoOffsetY;
+
+  ctx.save();
+  roundRectPath(ctx, x, y, w, h, radius);
+  ctx.clip();
+  ctx.translate(centerX, centerY);
+  ctx.rotate((photoRotation * Math.PI) / 180);
+  ctx.drawImage(userPhoto, -drawW / 2, -drawH / 2, drawW, drawH);
+  ctx.restore();
+}
+
+function drawName() {
+  const name = nameInput.value.trim().toUpperCase();
+  if (!name) return;
+
+  const maxTextWidth = PHOTO.w - 20;
+  const fontSize = fitText(ctx, name, NAME.fontSize, maxTextWidth, NAME.font);
+
+  ctx.font = NAME.font.replace('{SIZE}', fontSize);
+  ctx.fillStyle = nameColor.value;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+  
+  // Draw the text
+  ctx.fillText(name, NAME.centerX, NAME.baselineY, maxTextWidth);
+}
+
+// Auto-shrink font if text is too wide
+function fitText(ctx, text, startSize, maxWidth, fontTemplate) {
+  let size = startSize;
+  while (size > 10) {
+    ctx.font = fontTemplate.replace('{SIZE}', size);
+    if (ctx.measureText(text).width <= maxWidth) return size;
+    size--;
+  }
+  return 10;
+}
+
+function roundRectPath(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// ============ DOWNLOAD ============
+downloadBtn.addEventListener('click', () => {
+  const safeName = (nameInput.value || 'my').replace(/\s+/g, '-').toLowerCase();
+  const link = document.createElement('a');
+  link.download = `flyer-${safeName}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  updateStatus("Downloaded successfully!", "success");
+});
+
+// ============ UI HELPERS ============
+function checkReady() {
+  const hasPhoto = !!userPhoto;
+  const hasName = nameInput.value.trim().length > 0;
+  downloadBtn.disabled = !(hasPhoto && hasName);
+
+  if (hasPhoto && hasName) {
+    updateStatus("Looking good! Click Download.", "");
+  } else if (!hasPhoto) {
+    updateStatus("Upload a photo to continue...", "");
+  } else {
+    updateStatus("Enter your name (required) to continue...", "");
+  }
+}
+
+function updateStatus(msg, type) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status' + (type ? ' ' + type : '');
+}
+</script>
+
+</body>
+</html>
